@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Conversor de Valores</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="container">
+
+    <form action="/result" method="post">
+        <div>
+            <h1>Conversor de Valores</h1>
+        </div>
+        <div>
+            <label for="inputValue">Valor:</label>
+            <input type="text" id="inputValue" name="inputValue">
+        </div>
+
+        <div>
+            <label for="conversionType">Convertir a:</label>
+            <select id="conversionType" name="conversionType">
+                <option value="Binario">Binario</option>
+                <option value="Decimal">Decimal</option>
+                <option value="Hexadecimal">Hexadecimal</option>
+                <option value="IP">IP</option>
+                <option value="IP a Binario">IP a Binario</option>
+                <option value="IP a Decimal">IP a Decimal</option>
+                <option value="IP a Hexadecimal">IP a Hexadecimal</option>
+            </select>
+        </div>
+
+        <div>
+            <button type="submit">Convertir</button>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
