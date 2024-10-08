@@ -6,15 +6,22 @@ import static java.lang.Integer.*;
 
 @Service
 public class ConversionService {
+
     public String performConversion(String value, String conversionType) {
         switch (conversionType) {
-            case "Binario":
-                return convertToBinary(value);
-            case "Decimal":
-                return convertToDecimal(value);
-            case "Hexadecimal":
-                return convertToHexadecimal(value);
-            case "IP":
+            case "Decimal a Binario":
+                return convertDecimalToBinary(value);
+            case "Decimal a Hexadecimal":
+                return convertDecimalToHexadecimal(value);
+            case "Binario a Decimal":
+                return convertBinaryToDecimal(value);
+            case "Binario a Hexadecimal":
+                return convertBinaryToHexadecimal(value);
+            case "Hexadecimal a Decimal":
+                return convertHexadecimalToDecimal(value);
+            case "Hexadecimal a Binario":
+                return convertHexadecimalToBinary(value);
+            case "Decimal a IP":
                 return convertToIP(value);
             case "IP a Binario":
                 return convertIpToBinary(value);
@@ -28,26 +35,38 @@ public class ConversionService {
     }
 
     // Métodos de conversión
-    private String convertToBinary(String value) {
+    private String convertDecimalToBinary(String value) {
         return toBinaryString(parseInt(value));
     }
 
-    private String convertToDecimal(String value) {
-        return Integer.toString(parseInt(value, 2));
-    }
-
-    private String convertToHexadecimal(String value) {
+    private String convertDecimalToHexadecimal(String value) {
         return toHexString(parseInt(value));
     }
 
+    private String convertBinaryToDecimal(String value) {
+        return Integer.toString(parseInt(value, 2));
+    }
+
+    private String convertBinaryToHexadecimal(String value) {
+        return toHexString(parseInt(value, 2));
+    }
+
+    private String convertHexadecimalToDecimal(String value) {
+        return Integer.toString(parseInt(value, 16));
+    }
+
+    private String convertHexadecimalToBinary(String value) {
+        return toBinaryString(parseInt(value, 16));
+    }
+
     private String convertToIP(String value) {
-        // Ejemplo: convertir un valor entero a una IP (IPv4)
         int num = parseInt(value);
         return ((num >> 24) & 0xFF) + "." +
                 ((num >> 16) & 0xFF) + "." +
                 ((num >> 8) & 0xFF) + "." +
                 (num & 0xFF);
     }
+
     private String convertIpToBinary(String ip) {
         StringBuilder binaryIp = new StringBuilder();
         String[] octets = ip.split("\\.");
@@ -78,10 +97,10 @@ public class ConversionService {
 
         for (String octet : octets) {
             int decimalValue = parseInt(octet);
-            String hexValue = String.format("%02X", decimalValue); // Asegura que tenga 2 dígitos
+            String hexValue = String.format("%02X", decimalValue);
             hexIp.append(hexValue).append(":");
         }
 
-        return hexIp.toString().substring(0, hexIp.length() - 1); // Elimina el último dos puntos
+        return hexIp.toString().substring(0, hexIp.length() - 1);
     }
 }
