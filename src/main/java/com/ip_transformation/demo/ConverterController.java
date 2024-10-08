@@ -14,7 +14,7 @@ public class ConverterController {
 
     @GetMapping("/")
     public String index() {
-        return "index";  // Retorna la vista index.html
+        return "index";  
     }
 
     @PostMapping("/result")
@@ -25,6 +25,6 @@ public class ConverterController {
 
         String result = conversionService.performConversion(inputValue, conversionType);
         model.addAttribute("result", result);
-        return "result";  // Retorna la vista result.html con el resultado
+        return "result";
     }
 }

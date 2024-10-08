@@ -2,6 +2,8 @@ package com.ip_transformation.demo;
 
 import org.springframework.stereotype.Service;
 
+import static java.lang.Integer.*;
+
 @Service
 public class ConversionService {
     public String performConversion(String value, String conversionType) {
@@ -25,22 +27,22 @@ public class ConversionService {
         }
     }
 
-    // Métodos de conversión (implementa la lógica adecuada)
+    // Métodos de conversión
     private String convertToBinary(String value) {
-        return Integer.toBinaryString(Integer.parseInt(value));
+        return toBinaryString(parseInt(value));
     }
 
     private String convertToDecimal(String value) {
-        return Integer.toString(Integer.parseInt(value, 2));
+        return Integer.toString(parseInt(value, 2));
     }
 
     private String convertToHexadecimal(String value) {
-        return Integer.toHexString(Integer.parseInt(value));
+        return toHexString(parseInt(value));
     }
 
     private String convertToIP(String value) {
         // Ejemplo: convertir un valor entero a una IP (IPv4)
-        int num = Integer.parseInt(value);
+        int num = parseInt(value);
         return ((num >> 24) & 0xFF) + "." +
                 ((num >> 16) & 0xFF) + "." +
                 ((num >> 8) & 0xFF) + "." +
@@ -51,12 +53,12 @@ public class ConversionService {
         String[] octets = ip.split("\\.");
 
         for (String octet : octets) {
-            int decimalValue = Integer.parseInt(octet);
-            String binaryValue = String.format("%08d", Integer.parseInt(Integer.toBinaryString(decimalValue))); // Asegura que tenga 8 bits
+            int decimalValue = parseInt(octet);
+            String binaryValue = String.format("%08d", parseInt(toBinaryString(decimalValue)));
             binaryIp.append(binaryValue).append(".");
         }
 
-        return binaryIp.toString().substring(0, binaryIp.length() - 1); // Elimina el último punto
+        return binaryIp.toString().substring(0, binaryIp.length() - 1);
     }
 
     private long convertIpToDecimal(String ip) {
@@ -64,7 +66,7 @@ public class ConversionService {
         long decimalValue = 0;
 
         for (int i = 0; i < octets.length; i++) {
-            decimalValue += (Integer.parseInt(octets[i]) << (8 * (3 - i))); // Mueve el octeto correspondiente
+            decimalValue += (parseInt(octets[i]) << (8 * (3 - i)));
         }
 
         return decimalValue;
@@ -75,7 +77,7 @@ public class ConversionService {
         String[] octets = ip.split("\\.");
 
         for (String octet : octets) {
-            int decimalValue = Integer.parseInt(octet);
+            int decimalValue = parseInt(octet);
             String hexValue = String.format("%02X", decimalValue); // Asegura que tenga 2 dígitos
             hexIp.append(hexValue).append(":");
         }
