@@ -35,12 +35,12 @@ public class ConversionService {
     }
 
     // Métodos de conversión
-    private String convertDecimalToBinary(String value) {
+    public String convertDecimalToBinary(String value) {
         return toBinaryString(parseInt(value));
     }
 
     private String convertDecimalToHexadecimal(String value) {
-        return toHexString(parseInt(value));
+        return toHexString(parseInt(value)).toUpperCase();
     }
 
     private String convertBinaryToDecimal(String value) {
@@ -48,7 +48,7 @@ public class ConversionService {
     }
 
     private String convertBinaryToHexadecimal(String value) {
-        return toHexString(parseInt(value, 2));
+        return toHexString(parseInt(value, 2)).toUpperCase();
     }
 
     private String convertHexadecimalToDecimal(String value) {
