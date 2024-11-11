@@ -7,18 +7,13 @@
 <body>
 <div class="container">
 
-    <form action="/result" method="post">
+    <form action="/result" method="post" onsubmit="return validateForm()">
         <div>
             <h1>Conversor de Valores</h1>
         </div>
         <div>
-            <label for="inputValue">Valor:</label>
-            <input type="text" id="inputValue" name="inputValue">
-        </div>
-
-        <div>
             <label for="conversionType">Convertir a:</label>
-            <select id="conversionType" name="conversionType">
+            <select id="conversionType" name="conversionType" onchange="validateInput()">
                 <option value="Decimal a Binario">Decimal a Binario</option>
                 <option value="Decimal a Hexadecimal">Decimal a Hexadecimal</option>
                 <option value="Decimal a IP">Decimal a IP</option>
@@ -31,13 +26,18 @@
                 <option value="IP a Hexadecimal">IP a Hexadecimal</option>
             </select>
         </div>
-
+        <div>
+            <label for="inputValue">Valor:</label>
+            <input type="text" id="inputValue" name="inputValue" oninput="validateInput()">
+            <small id="error-message" style="color: red;"></small>
+        </div>
         <div>
             <button type="submit">Convertir</button>
         </div>
-
     </form>
 </div>
+
+<script th:src="@{/conversor.js}"></script>
 
 </body>
 </html>
